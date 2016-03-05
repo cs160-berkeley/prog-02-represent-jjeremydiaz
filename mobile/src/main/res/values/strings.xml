@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Represent</string>
+    <string name="action_settings">Settings</string>
+    <string name="card_title_1">Welcome to represent!</string>
+    <string name="card_title_2">Location</string>
+    <string name="card_title_3">ZIP Code</string>
+    <string name="card_text_1">To start using represent you must select a location. You
+        can choose between entering a ZIP code or selecting your current Location.</string>
+    <string name="card_text_2">Please enter your zip code:</string>
+    <string name="zip_input">Use ZIP Code</string>
+    <string name="current_location">Current Location</string>
+    <string name="title_activity_congress_view">Represent</string>
+    <string name="title_activity_detailed_view">DetailedViewActivity</string>
+</resources>

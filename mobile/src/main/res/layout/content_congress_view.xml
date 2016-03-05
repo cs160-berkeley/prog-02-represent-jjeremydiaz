@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_congress_view"
+    tools:context="com.example.jeremy.represent.CongressViewActivity"
+    android:background="#efefef">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/senator_1_card_view"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardCornerRadius="1dp">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/senator_1_image_view" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="0dp"
+                        android:id="@+id/senator_1_name"
+                        android:text="Senator 1"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#222222" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="0dp"
+                        android:id="@+id/senator_1_party"
+                        android:text="Party"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#444444" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="0dp"
+                        android:id="@+id/senator_1_website"
+                        android:text="Website"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#444444" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="15dp"
+                        android:text="Latest Tweet:"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#444444" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="15dp"
+                        android:id="@+id/senator_1_tweet"
+                        android:text="\@someone example tweet"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#444444" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="More Info"
+                        android:id="@+id/senator_1_info_button"
+                        android:layout_gravity="center"
+                        android:background="?android:selectableItemBackground"
+                        android:layout_weight="2"
+                        android:textColor="#057891" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/senator_2_card_view"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardCornerRadius="1dp">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/senator_2_image_view" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="0dp"
+                        android:id="@+id/senator_2_name"
+                        android:text="Senator 2"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#222222" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="0dp"
+                        android:id="@+id/senator_2_party"
+                        android:text="Party"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#444444" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="0dp"
+                        android:id="@+id/senator_2_website"
+                        android:text="Website"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#444444" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="15dp"
+                        android:text="Latest Tweet:"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#444444" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="15dp"
+                        android:id="@+id/senator_2_tweet"
+                        android:text="\@someone example tweet"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#444444" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="More Info"
+                        android:id="@+id/senator_2_info_button"
+                        android:layout_gravity="center"
+                        android:background="?android:selectableItemBackground"
+                        android:layout_weight="2"
+                        android:textColor="#057891" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/senator_3_card_view"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardCornerRadius="1dp">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/senator_3_image_view" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="0dp"
+                        android:id="@+id/senator_3_name"
+                        android:text="Representative 1"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#222222" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="0dp"
+                        android:id="@+id/senator_3_party"
+                        android:text="Party"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#444444" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="0dp"
+                        android:id="@+id/senator_3_website"
+                        android:text="Website"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#444444" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="15dp"
+                        android:text="Latest Tweet:"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#444444" />
+                    <EditText
+                        android:layout_gravity="top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="0dp"
+                        android:paddingTop="15dp"
+                        android:id="@+id/senator_3_tweet"
+                        android:text="\@someone example tweet"
+                        android:editable="false"
+                        android:background="@null"
+                        android:inputType="none"
+                        android:typeface="normal"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#444444" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="More Info"
+                        android:id="@+id/representative_1_info_button"
+                        android:layout_gravity="center"
+                        android:background="?android:selectableItemBackground"
+                        android:layout_weight="2"
+                        android:textColor="#057891" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</ScrollView>

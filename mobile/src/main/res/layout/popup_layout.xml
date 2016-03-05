@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view3"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        card_view:cardElevation="3dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardCornerRadius="1dp"
+        android:background="#efefef">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:orientation="vertical" >
+
+            <EditText
+                android:layout_gravity="top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:id="@+id/editText3"
+                android:text="@string/card_title_3"
+                android:editable="false"
+                android:background="@null"
+                android:inputType="none"
+                android:typeface="normal"
+                android:textStyle="normal"
+                android:textSize="26sp"
+                android:textColor="#222222"/>
+            <EditText
+                android:layout_gravity="top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:id="@+id/editText4"
+                android:text="@string/card_text_2"
+                android:editable="false"
+                android:background="@null"
+                android:inputType="none"
+                android:typeface="normal"
+                android:textStyle="normal"
+                android:textSize="18sp"
+                android:textColor="#444444"/>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1.80">
+
+                <EditText
+                    android:layout_width="107dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/zip_input"
+                    android:textSize="10dp"
+                    android:lines="1"
+                    style="@style/EditTextCustomHolo"
+                    android:textColor="#444444"
+                    android:id="@+id/zip_edit"
+                    android:layout_gravity="center_vertical" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/warningText"
+                    android:editable="false"
+                    android:background="@android:color/transparent"
+                    android:textColor="#f45959"
+                    android:textSize="10dp"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:id="@+id/button2"
+                android:layout_gravity="center_vertical"
+                android:background="?android:selectableItemBackground"
+                android:textColor="#057891" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:id="@+id/button3"
+                    android:layout_gravity="center_vertical"
+                    android:background="?android:selectableItemBackground"
+                    android:textColor="#057891" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
