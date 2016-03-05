@@ -66,7 +66,8 @@ public class WatchToPhoneService extends Service {
         // Which cat do we want to feed? Grab this info from INTENT
         // which was passed over when we called startService
         Bundle extras = intent.getExtras();
-        final String zip = extras.getString("zip");
+        final String path = extras.getString("path"); //use path to differentiate output
+        final String message = extras.getString("message"); //to send
 
         // Send the message with the cat name
         new Thread(new Runnable() {
@@ -75,7 +76,7 @@ public class WatchToPhoneService extends Service {
                 //first, connect to the apiclient
                 mWatchApiClient.connect();
                 //now that you're connected, send a massage with the cat name
-                sendMessage("/zip", zip);
+                sendMessage("/" + path, message);
             }
         }).start();
 

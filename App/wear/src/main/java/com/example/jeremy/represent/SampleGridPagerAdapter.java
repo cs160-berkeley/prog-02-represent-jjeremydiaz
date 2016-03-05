@@ -4,6 +4,7 @@ package com.example.jeremy.represent;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
@@ -15,6 +16,9 @@ import android.support.wearable.view.CardFragment;
 import android.support.wearable.view.FragmentGridPagerAdapter;
 import android.support.wearable.view.GridPagerAdapter;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +31,7 @@ import java.util.List;
  * loaded from an background task and then updated using {@link #notifyRowBackgroundChanged(int)}
  * and {@link #notifyPageBackgroundChanged(int, int)}.
  */
-public class SampleGridPagerAdapter extends FragmentGridPagerAdapter {
+public class SampleGridPagerAdapter extends FragmentGridPagerAdapter{
     private static final int TRANSITION_DURATION_MILLIS = 50;
 
     private final Context mContext;
@@ -50,13 +54,17 @@ public class SampleGridPagerAdapter extends FragmentGridPagerAdapter {
 
         mRows.add(new Row(
                 //cardFragment(CardFragment.create(), R.string.test),
-                CardFragment.create(values[0], values[1]),
+                //CardFragment.create(values[0], values[1]),
+                //CustomCardFragment.create(values[0], values[1]),
+                cardFragment(values[0], values[1], 0, 0),
                 new CustomFragment()));
         mRows.add(new Row(
-                CardFragment.create(values[2], values[3]),
+                //CardFragment.create(values[2], values[3]),
+                cardFragment(values[2], values[3], 0, 1),
                 new CustomFragment()));
         mRows.add(new Row(
-                CardFragment.create(values[4], values[5]),
+                //CardFragment.create(values[4], values[5]),
+                cardFragment(values[4], values[5], 0, 2),
                 new CustomFragment()));
         mDefaultBg = new ColorDrawable(R.color.dark_grey);
         mClearBg = new ColorDrawable(android.R.color.transparent);
@@ -99,6 +107,8 @@ public class SampleGridPagerAdapter extends FragmentGridPagerAdapter {
         }
     };
 
+
+    /*
     private Fragment cardFragment(int titleRes, int textRes) {
         Resources res = mContext.getResources();
         CardFragment fragment =
@@ -106,6 +116,60 @@ public class SampleGridPagerAdapter extends FragmentGridPagerAdapter {
         // Add some extra bottom margin to leave room for the page indicator
         fragment.setCardMarginBottom(
                 res.getDimensionPixelSize(R.dimen.card_margin_bottom));
+        return fragment;
+    }
+    */
+
+    /*
+    private Fragment cardFragment(int titleRes, int textRes) {
+        Resources res = mContext.getResources();
+        CustomCardFragment fragment = CustomCardFragment.create(res.getText(titleRes), res.getText(textRes));
+        fragment.setCardMarginBottom(res.getDimensionPixelSize(R.dimen.card_margin_bottom));
+        fragment.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(final View view) {
+                //do everything you want
+                //here you've got access to clicked fragment
+                Log.d("Test", "on click test2");
+            }
+
+        });
+        return fragment;
+    }
+    */
+
+    //test
+    private Fragment cardFragment(String title, String text, int x, int y){
+        Resources res = mContext.getResources();
+        final CustomCardFragment fragment = CustomCardFragment.create(title, text, x, y);
+        fragment.setCardMarginBottom(res.getDimensionPixelSize(R.dimen.card_margin_bottom));
+        fragment.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(final View view) {
+                //do everything you want
+                //here you've got access to clicked fragment
+                int position = fragment.getFragmentPosition();
+
+                //New intent for detailed view
+                Intent detailedIntent = new Intent(mContext, WatchToPhoneService.class);
+                detailedIntent.putExtra("path", "detailed");
+                detailedIntent.putExtra("message", fragment.getName());
+
+                Log.d("Position", Integer.toString(position));
+                if (position == 0) {
+                    Log.d("Test", "0");
+                }
+                else if(position == 1){
+                    Log.d("Test", "1");
+                }
+                else{
+                    Log.d("Test", "2");
+                }
+                mContext.startService(detailedIntent);
+            }
+        });
         return fragment;
     }
 

@@ -1,5 +1,6 @@
 package com.example.jeremy.represent;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.support.wearable.view.BoxInsetLayout;
 import android.support.wearable.view.CardFragment;
 import android.support.wearable.view.DotsPageIndicator;
 import android.support.wearable.view.GridViewPager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
 import android.widget.TextView;
@@ -87,7 +89,8 @@ public class MainActivity extends WearableActivity {
                     send = "94547";
                 }
 
-                sendIntent.putExtra("zip", send);
+                sendIntent.putExtra("message", send);
+                sendIntent.putExtra("path", send);
                 startService(sendIntent);
 
             }
@@ -115,9 +118,29 @@ public class MainActivity extends WearableActivity {
                 return insets;
             }
         });
-        pager.setAdapter(new SampleGridPagerAdapter(this, getFragmentManager(), ui_arr));
+        SampleGridPagerAdapter check = new SampleGridPagerAdapter(this, getFragmentManager(), ui_arr);
+        pager.setAdapter(check);
         DotsPageIndicator dotsPageIndicator = (DotsPageIndicator) findViewById(R.id.page_indicator);
         dotsPageIndicator.setPager(pager);
+
+        //test
+        /*
+        Fragment fragment = check.getFragment(1,1);
+        View view = fragment.getView();
+
+        if (view != null) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    Toast.makeText(MainActivity.this, "testing touch detection", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
+        }
+        else{
+            Toast.makeText(MainActivity.this, "view is null", Toast.LENGTH_SHORT).show();
+        }
+        */
     }
 
     //Deals with shake listener as well
