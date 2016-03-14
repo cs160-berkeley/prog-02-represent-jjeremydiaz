@@ -18,15 +18,25 @@ public class CustomCardFragment extends CardFragment{
     private int x;
     private int y;
     private String name;
+    private String party;
+    private String mBills;
+    private String mTerm;
+    private String mCommittee;
+    private String mBioguide;
 
-    public static CustomCardFragment create(CharSequence title, CharSequence text, int x, int y) {
+    public static CustomCardFragment create(CharSequence title, CharSequence text, int x, int y, String bills, String term, String committee, String bioguide) {
         CustomCardFragment fragment = new CustomCardFragment();
         Bundle args = new Bundle();
         if (title != null) args.putCharSequence("CardFragment_title", title);
         if (text != null) args.putCharSequence("CardFragment_text", text);
         fragment.setName(title.toString()); //TODO may be for testing purposes only until api is set
+        fragment.setParty(text.toString());
         fragment.setArguments(args);
         fragment.setPosition(x, y);
+        fragment.setBills(bills);
+        fragment.setTerm(term);
+        fragment.setCommittee(committee);
+        fragment.setBioguide(bioguide);
         return fragment;
     }
 
@@ -74,5 +84,39 @@ public class CustomCardFragment extends CardFragment{
     }
     public String getName(){
         return this.name;
+    }
+    public void setParty(String party){
+        this.party = party;
+    }
+    public String getParty(){
+        return this.party;
+    }
+
+    public void setBills(String bills){
+        this.mBills = bills;
+    }
+    public String getBills(){
+        return this.mBills;
+    }
+
+    public void setTerm(String term){
+        this.mTerm = term;
+    }
+    public String getTerm(){
+        return this.mTerm;
+    }
+
+    public void setCommittee(String committee){
+        this.mCommittee = committee;
+    }
+    public String getCommittee(){
+        return this.mCommittee;
+    }
+
+    public void setBioguide(String bioguide){
+        this.mBioguide = bioguide;
+    }
+    public String getBioguide(){
+        return this.mBioguide;
     }
 }

@@ -5,6 +5,9 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +31,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCht5A_yGZVmMVvEpqZ1j7CXKqZcQ6A8OI" />
+            android:value="AIzaSyCHFlMt_7qfmaVDt4w5sDT7rjfFeNVx79U" />
 
         <activity
             android:name=".CongressViewActivity"
@@ -56,6 +59,9 @@
                 <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
             </intent-filter>
         </service>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="309ce226dafe67a61bdcf7a3166345db34c472ea" />
     </application>
 
 </manifest>

@@ -8,11 +8,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import com.squareup.picasso.Picasso;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.AppSession;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterApiClient;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.models.Tweet;
+
+import java.util.List;
+
+import io.fabric.sdk.android.Fabric;
 
 public class CongressViewActivity extends AppCompatActivity {
     ImageView imageView1;
@@ -20,10 +36,115 @@ public class CongressViewActivity extends AppCompatActivity {
     RoundImage roundedImage2;
     RoundImage roundedImage3;
     String zip_code;
+    String sen_1_name;
+    String sen_1_party;
+    String sen_1_website;
+    String sen_1_bills;
+    String sen_1_term;
+    String sen_1_committee;
+    String sen_1_tweetID;
+    String sen_1_tweets;
+    String sen_2_name;
+    String sen_2_party;
+    String sen_2_website;
+    String sen_2_bills;
+    String sen_2_term;
+    String sen_2_committee;
+    String sen_2_tweetID;
+    String sen_2_tweets;
+    String rep_1_name;
+    String rep_1_party;
+    String rep_1_website;
+    String rep_1_bills;
+    String rep_1_term;
+    String rep_1_committee;
+    String rep_1_tweetID;
+    String rep_1_tweets;
+
+    //Get Bio IDs for images
+    //Bioguide for images
+    String sen_1_bioguide;
+    String sen_2_bioguide;
+    String rep_1_bioguide;
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "nH7CbNFDxK2SeLxoV2SGTOFas";
+    private static final String TWITTER_SECRET = "tE9OLTWLbLuq06riEpcbuhMdSa5bZAV37tXUi4CrtclXUH4rkD";
+
+    String image_base = "https://theunitedstates.io/images/congress/225x275/";
+    String jpg = ".jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
+
+        //Guest login and authentication https://twittercommunity.com/t/test-run-with-fabric-android/60673
+        TwitterCore.getInstance().logInGuest(new Callback<AppSession>() {
+            @Override
+            public void success(Result<AppSession> appSessionResult) {
+                AppSession session = appSessionResult.data;
+                TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient(session);
+                twitterApiClient.getStatusesService().userTimeline(null, sen_1_tweetID, 1, null, null, false, false, false, true, new Callback<List<Tweet>>() {
+                    @Override
+                    public void success(Result<List<Tweet>> listResult) {
+                        for (Tweet tweet : listResult.data) {
+                            final EditText sen_1_tweet = (EditText) findViewById(R.id.senator_1_tweet);
+                            sen_1_tweet.setText(tweet.text);
+                            Log.d("fabricstuff", "result: " + tweet.text);
+                        }
+                    }
+
+                    @Override
+                    public void failure(TwitterException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+                twitterApiClient.getStatusesService().userTimeline(null, sen_2_tweetID, 1, null, null, false, false, false, true, new Callback<List<Tweet>>() {
+                    @Override
+                    public void success(Result<List<Tweet>> listResult) {
+                        for (Tweet tweet : listResult.data) {
+                            final EditText sen_2_tweet = (EditText) findViewById(R.id.senator_2_tweet);
+                            sen_2_tweet.setText(tweet.text);
+                            Log.d("fabricstuff", "result: " + tweet.text);
+                        }
+                    }
+
+                    @Override
+                    public void failure(TwitterException e) {
+                        e.printStackTrace();
+                    }
+                });
+                twitterApiClient.getStatusesService().userTimeline(null, rep_1_tweetID, 1, null, null, false, false, false, true, new Callback<List<Tweet>>() {
+                    @Override
+                    public void success(Result<List<Tweet>> listResult) {
+                        for (Tweet tweet : listResult.data) {
+                            final EditText rep_1_tweet = (EditText) findViewById(R.id.senator_3_tweet);
+                            rep_1_tweet.setText(tweet.text);
+                            Log.d("fabricstuff", "result: " + tweet.text);
+                        }
+                    }
+
+                    @Override
+                    public void failure(TwitterException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+            }
+
+            @Override
+            public void failure(TwitterException e) {
+                e.printStackTrace();
+            }
+        });
+
+        //Log.d("result0:", sen_1_tweet);
+        //Log.d("result1:", sen_2_tweet);
+        //Log.d("result2:", rep_1_tweet);
+
         setContentView(R.layout.activity_congress_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -36,6 +157,30 @@ public class CongressViewActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             zip_code = extras.getString("zip1");
+            sen_1_name = extras.getString("sen_1_name");
+            sen_1_party = extras.getString("sen_1_party");
+            sen_1_website = extras.getString("sen_1_website");
+            sen_1_bills = extras.getString("sen_1_bills");
+            sen_1_term = extras.getString("sen_1_term");
+            sen_1_committee = extras.getString("sen_1_committee");
+            sen_1_tweetID = extras.getString("sen_1_tweetID");
+            sen_2_name = extras.getString("sen_2_name");
+            sen_2_party = extras.getString("sen_2_party");
+            sen_2_website = extras.getString("sen_2_website");
+            sen_2_bills = extras.getString("sen_2_bills");
+            sen_2_term = extras.getString("sen_2_term");
+            sen_2_committee = extras.getString("sen_2_committee");
+            sen_2_tweetID = extras.getString("sen_2_tweetID");
+            rep_1_name = extras.getString("rep_1_name");
+            rep_1_party = extras.getString("rep_1_party");
+            rep_1_website = extras.getString("rep_1_website");
+            rep_1_bills = extras.getString("rep_1_bills");
+            rep_1_term = extras.getString("rep_1_term");
+            rep_1_committee = extras.getString("rep_1_committee");
+            rep_1_tweetID = extras.getString("rep_1_tweetID");
+            sen_1_bioguide = extras.getString("sen_1_bioguide");
+            sen_2_bioguide = extras.getString("sen_2_bioguide");
+            rep_1_bioguide = extras.getString("rep_1_bioguide");
         }
 
         //Only works on perfectly square images so it must rescale
@@ -47,64 +192,44 @@ public class CongressViewActivity extends AppCompatActivity {
         String imageType = options.outMimeType;
 
         //TextViews for 3 cardviews
-        final EditText sen_1_name = (EditText) findViewById(R.id.senator_1_name);
-        final EditText sen_1_party = (EditText) findViewById(R.id.senator_1_party);
+        final EditText t_sen_1_name = (EditText) findViewById(R.id.senator_1_name);
+        final EditText t_sen_1_party = (EditText) findViewById(R.id.senator_1_party);
         final EditText sen_1_website = (EditText) findViewById(R.id.senator_1_website);
-        final EditText sen_1_tweet = (EditText) findViewById(R.id.senator_1_tweet);
+        //final EditText sen_1_tweet = (EditText) findViewById(R.id.senator_1_tweet);
 
-        final EditText sen_2_name = (EditText) findViewById(R.id.senator_2_name);
-        final EditText sen_2_party = (EditText) findViewById(R.id.senator_2_party);
+        final EditText t_sen_2_name = (EditText) findViewById(R.id.senator_2_name);
+        final EditText t_sen_2_party = (EditText) findViewById(R.id.senator_2_party);
         final EditText sen_2_website = (EditText) findViewById(R.id.senator_2_website);
-        final EditText sen_2_tweet = (EditText) findViewById(R.id.senator_2_tweet);
+        //final EditText sen_2_tweet = (EditText) findViewById(R.id.senator_2_tweet);
 
-        final EditText sen_3_name = (EditText) findViewById(R.id.senator_3_name);
-        final EditText sen_3_party = (EditText) findViewById(R.id.senator_3_party);
+        final EditText t_sen_3_name = (EditText) findViewById(R.id.senator_3_name);
+        final EditText t_sen_3_party = (EditText) findViewById(R.id.senator_3_party);
         final EditText sen_3_website = (EditText) findViewById(R.id.senator_3_website);
-        final EditText sen_3_tweet = (EditText) findViewById(R.id.senator_3_tweet);
+        //final EditText sen_3_tweet = (EditText) findViewById(R.id.senator_3_tweet);
         //Convert new scaled down square image to round
 
         //demo String uri selection
         final String uri1;
         final String uri2;
         final String uri3;
-        if(zip_code.equals(demo_arr[0])) {
-            uri1 = "@drawable/sen_sample_1";
-            sen_1_name.setText("Dianne Feinstein");
-            sen_1_party.setText("Democrat");
-            sen_1_website.setText("http://www.feinstein.senate.gov/public/");
-            sen_1_tweet.setText("@SenFeinstein  2h2 hours ago Spoke on the Senate floor urging Republicans to consider president’s nominee to the Supreme Court. Watch: https://youtu.be/9KS53s-3tKA  #SCOTUS");
 
-            uri2 = "@drawable/sen_sample_2";
-            sen_2_name.setText("Barbara Boxer");
-            sen_2_party.setText("Democrat");
-            sen_2_website.setText("http://www.barbaraboxer.com/");
-            sen_2_tweet.setText("@SenatorBoxer  Feb 25 @SenateDems stood united at the Supreme Court today to tell @Senate_GOPs: #DoYourJob ");
+        uri1 = "@drawable/sen_sample_1";
+        t_sen_1_name.setText(this.sen_1_name);
+        t_sen_1_party.setText(this.sen_1_party);
+        sen_1_website.setText(this.sen_1_website);
+        //sen_1_tweet.setText(sen_1_tweetID);
 
-            uri3 = "@drawable/rep_sample_1";
-            sen_3_name.setText("Mike Thompson");
-            sen_3_party.setText("Democrat");
-            sen_3_website.setText("http://mikethompson.house.gov/");
-            sen_3_tweet.setText("@RepThompson  6h6 hours ago Proud to announce the 2016 Congressional Art Competition! Deadline to submit artwork is April 4. Contact my Napa District Office for details");
-        }
-        else {
-            uri1 = "@drawable/sen_sample_1_in";
-            sen_1_name.setText("Joe Donnelly");
-            sen_1_party.setText("Democrat");
-            sen_1_website.setText("http://www.donnelly.senate.gov/");
-            sen_1_tweet.setText("@SenDonnelly  8h8 hours ago .@INDairport was named the best airport in North America for the 4th year in a row. http://bit.ly/1oKcvA1  #GoodNews");
+        uri2 = "@drawable/sen_sample_2";
+        t_sen_2_name.setText(this.sen_2_name);
+        t_sen_2_party.setText(this.sen_2_party);
+        sen_2_website.setText(this.sen_2_website);
+        //sen_2_tweet.setText(this.sen_2_tweetID);
 
-            uri2 = "@drawable/sen_sample_2_in";
-            sen_2_name.setText("Dan Coats");
-            sen_2_party.setText("Republican");
-            sen_2_website.setText("http://www.coats.senate.gov/");
-            sen_2_tweet.setText("@SenatorBoxer  Feb 25 @SenateDems stood united at the Supreme Court today to tell @Senate_GOPs: #DoYourJob ");
-
-            uri3 = "@drawable/rep_sample_2";
-            sen_3_name.setText("Peter J. Visclosky");
-            sen_3_party.setText("Democrat");
-            sen_3_website.setText("https://visclosky.house.gov/");
-            sen_3_tweet.setText("@RepVisclosky  Feb 29 Pleased to meet Elizabeth Gonzalez and hear about her inspiring anti-bullying campaign!  Keep up the great work!");
-        }
+        uri3 = "@drawable/rep_sample_1";
+        t_sen_3_name.setText(this.rep_1_name);
+        t_sen_3_party.setText(this.rep_1_party);
+        sen_3_website.setText(this.rep_1_website);
+        //sen_3_tweet.setText(this.rep_1_tweetID);
 
         //Round image and display
         roundedImage = new RoundImage(getResized(uri1));
@@ -112,13 +237,16 @@ public class CongressViewActivity extends AppCompatActivity {
         roundedImage3 = new RoundImage(getResized(uri3));
 
         imageView1 = (ImageView) findViewById(R.id.senator_1_image_view);
-        imageView1.setImageDrawable(roundedImage);
+        //imageView1.setImageDrawable(roundedImage);
+        Picasso.with(this).load(image_base + sen_1_bioguide + jpg).resize(200, 200).transform(new CircleTransform()).into(imageView1);
 
         ImageView imageView2 = (ImageView) findViewById(R.id.senator_2_image_view);
-        imageView2.setImageDrawable(roundedImage2);
+        //imageView2.setImageDrawable(roundedImage2);
+        Picasso.with(this).load(image_base + sen_2_bioguide + jpg).resize(200, 200).transform(new CircleTransform()).into(imageView2);
 
         ImageView imageView3 = (ImageView) findViewById(R.id.senator_3_image_view);
-        imageView3.setImageDrawable(roundedImage3);
+        //imageView3.setImageDrawable(roundedImage3);
+        Picasso.with(this).load(image_base + rep_1_bioguide + jpg).resize(200, 200).transform(new CircleTransform()).into(imageView3);
 
         //New detailed activity view
         final Intent mDetailedActivity = new Intent(CongressViewActivity.this, DetailedViewActivity.class);
@@ -128,20 +256,12 @@ public class CongressViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 mDetailedActivity.putExtra("uri", uri1);
-                mDetailedActivity.putExtra("name", sen_1_name.getText().toString());
-                mDetailedActivity.putExtra("party", sen_1_party.getText().toString());
-
-                //Pass dummy values for term ends, current committees, and recent bills
-                if(sen_1_name.getText().toString().equals("Dianne Feinstein")){
-                    mDetailedActivity.putExtra("term_end", "January 3, 2019");
-                    mDetailedActivity.putExtra("committees", "Appropriations Committee, Select Committee on Intelligence, Judiciary Committee, Rules and Administration Committee");
-                    mDetailedActivity.putExtra("bills", "Trade Act of 2015, Defending Public Safety Employee's Retirement Act, National Defense Authorization Act for Fiscal Year 2016");
-                }
-                else{
-                    mDetailedActivity.putExtra("term_end", "January 3, 2019");
-                    mDetailedActivity.putExtra("committees", "Special Committee on Aging, Agriculture, Nutrition, and Forestry Committee, Armed Services Committee, Banking, Housing, and Urban Affairs Committee");
-                    mDetailedActivity.putExtra("bills", "FDA Regulatory Efficiency Act, Clean Air Act");
-                }
+                mDetailedActivity.putExtra("name", sen_1_name);
+                mDetailedActivity.putExtra("party", sen_1_party);
+                mDetailedActivity.putExtra("term_end", sen_1_term);
+                mDetailedActivity.putExtra("committees", sen_1_committee);
+                mDetailedActivity.putExtra("bills", sen_1_bills);
+                mDetailedActivity.putExtra("bioguide", sen_1_bioguide);
 
                 startActivity(mDetailedActivity);
             }
@@ -151,23 +271,14 @@ public class CongressViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 mDetailedActivity.putExtra("uri", uri2);
-                mDetailedActivity.putExtra("name", sen_2_name.getText().toString());
-                mDetailedActivity.putExtra("party", sen_2_party.getText().toString());
+                mDetailedActivity.putExtra("name", sen_2_name);
+                mDetailedActivity.putExtra("party", sen_2_party);
+                mDetailedActivity.putExtra("term_end", sen_2_term);
+                mDetailedActivity.putExtra("committees", sen_2_committee);
+                mDetailedActivity.putExtra("bills", sen_2_bills);
+                mDetailedActivity.putExtra("bioguide", sen_2_bioguide);
 
-                //Pass dummy values for term ends, current committees, and recent bills
-                if(sen_2_name.getText().toString().equals("Barbara Boxer")){
-                    mDetailedActivity.putExtra("term_end", "January 3, 2017");
-                    mDetailedActivity.putExtra("committees", "Select Committee on Ethics, Environment and Public Works Committee, Foreign Relations Committee");
-                    mDetailedActivity.putExtra("bills", "Female Veteran Suicide Prevention Act, Pechanga Band of Luiseno Mission Indians Water RIghts Settlement Act, Tule Lake Nation HIstoric Site Establishment Act of 2015");
-                }
-                else{
-                    mDetailedActivity.putExtra("term_end", "January 3, 2017");
-                    mDetailedActivity.putExtra("committees", "Finance Committee, Select Committee on Intelligence, Join Economic Committee");
-                    mDetailedActivity.putExtra("bills", "Require Evaluation before Implementing Executive Wishlists Act of 2015, Control Unlawful Fugitive Felons Act of 2015, Access to Court challenges Act of 2015");
-                }
                 startActivity(mDetailedActivity);
-
-
             }
         });
         Button mbutton3 = (Button) findViewById(R.id.representative_1_info_button);
@@ -175,20 +286,13 @@ public class CongressViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 mDetailedActivity.putExtra("uri", uri3);
-                mDetailedActivity.putExtra("name", sen_3_name.getText().toString());
-                mDetailedActivity.putExtra("party", sen_3_party.getText().toString());
+                mDetailedActivity.putExtra("name", rep_1_name);
+                mDetailedActivity.putExtra("party", rep_1_party);
+                mDetailedActivity.putExtra("term_end", rep_1_term);
+                mDetailedActivity.putExtra("committees", rep_1_committee);
+                mDetailedActivity.putExtra("bills", rep_1_bills);
+                mDetailedActivity.putExtra("bioguide", rep_1_bioguide);
 
-                //Pass dummy values for term ends, current committees, and recent bills
-                if(sen_3_name.getText().toString().equals("Mike Thompson")){
-                    mDetailedActivity.putExtra("term_end", "January 3, 2017");
-                    mDetailedActivity.putExtra("committees", "Ways and Means Committee");
-                    mDetailedActivity.putExtra("bills", "United States Fish and Wildlife Service Resource Protection Act");
-                }
-                else{
-                    mDetailedActivity.putExtra("term_end", "January 3, 2017");
-                    mDetailedActivity.putExtra("committees", "Appropriations Committee");
-                    mDetailedActivity.putExtra("bills", "American Steel First Act of 2015, Fighting for American Jobs Act of 2015, Fighting for American Jobs Act of 2013");
-                }
                 startActivity(mDetailedActivity);
             }
         });

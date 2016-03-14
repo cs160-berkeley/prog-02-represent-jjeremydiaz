@@ -53,19 +53,14 @@ public class SampleGridPagerAdapter extends FragmentGridPagerAdapter{
         mRows = new ArrayList<SampleGridPagerAdapter.Row>();
 
         mRows.add(new Row(
-                //cardFragment(CardFragment.create(), R.string.test),
-                //CardFragment.create(values[0], values[1]),
-                //CustomCardFragment.create(values[0], values[1]),
-                cardFragment(values[0], values[1], 0, 0),
-                new CustomFragment()));
+                cardFragment(values[0], values[1], 0, 0, values[7], values[8], values[9], values[28]),
+                new CustomFragment(values[16], values[17], values[18], values[19])));
         mRows.add(new Row(
-                //CardFragment.create(values[2], values[3]),
-                cardFragment(values[2], values[3], 0, 1),
-                new CustomFragment()));
+                cardFragment(values[2], values[3], 0, 1, values[10], values[11], values[12], values[29]),
+                new CustomFragment(values[20], values[21], values[22], values[23])));
         mRows.add(new Row(
-                //CardFragment.create(values[4], values[5]),
-                cardFragment(values[4], values[5], 0, 2),
-                new CustomFragment()));
+                cardFragment(values[4], values[5], 0, 2, values[13], values[14], values[15], values[30]),
+                new CustomFragment(values[24], values[25], values[26], values[27])));
         mDefaultBg = new ColorDrawable(R.color.dark_grey);
         mClearBg = new ColorDrawable(android.R.color.transparent);
     }
@@ -76,12 +71,7 @@ public class SampleGridPagerAdapter extends FragmentGridPagerAdapter{
             //TODO dummy static resid, has to be dynamic
 
             int resid = 0;
-            if(zip_choose.equals("94547")) {
-                resid = BG_IMAGES[row % BG_IMAGES.length];
-            }
-            else{
-                resid = BG_IMAGES2[row % BG_IMAGES2.length];
-            }
+            resid = BG_IMAGES[row % BG_IMAGES.length];
 
             new DrawableLoadingTask(mContext) {
                 @Override
@@ -140,9 +130,9 @@ public class SampleGridPagerAdapter extends FragmentGridPagerAdapter{
     */
 
     //test
-    private Fragment cardFragment(String title, String text, int x, int y){
+    private Fragment cardFragment(String title, String text, int x, int y, String bills, String term, String committee, String bioguide){
         Resources res = mContext.getResources();
-        final CustomCardFragment fragment = CustomCardFragment.create(title, text, x, y);
+        final CustomCardFragment fragment = CustomCardFragment.create(title, text, x, y, bills, term, committee, bioguide);
         fragment.setCardMarginBottom(res.getDimensionPixelSize(R.dimen.card_margin_bottom));
         fragment.setOnClickListener(new View.OnClickListener() {
 
@@ -156,6 +146,11 @@ public class SampleGridPagerAdapter extends FragmentGridPagerAdapter{
                 Intent detailedIntent = new Intent(mContext, WatchToPhoneService.class);
                 detailedIntent.putExtra("path", "detailed");
                 detailedIntent.putExtra("message", fragment.getName());
+                detailedIntent.putExtra("party", fragment.getParty());
+                detailedIntent.putExtra("bills", fragment.getBills());
+                detailedIntent.putExtra("term", fragment.getTerm());
+                detailedIntent.putExtra("committee", fragment.getCommittee());
+                detailedIntent.putExtra("bioguide", fragment.getBioguide());
 
                 Log.d("Position", Integer.toString(position));
                 if (position == 0) {
@@ -176,14 +171,9 @@ public class SampleGridPagerAdapter extends FragmentGridPagerAdapter{
     //TODO dummy, need to find a way to load images dynamically
     //Change this to draw bg images
     static final int[] BG_IMAGES = new int[] {
-            R.drawable.sen_sample_1,
-            R.drawable.sen_sample_2,
-            R.drawable.rep_sample_1,
-    };
-    static final int[] BG_IMAGES2 = new int[] {
-            R.drawable.sen_sample_1_in,
-            R.drawable.sen_sample_2_in,
-            R.drawable.rep_sample_2
+            R.drawable.green,
+            R.drawable.green,
+            R.drawable.blue,
     };
 
     /** A convenient container for a row of fragments. */

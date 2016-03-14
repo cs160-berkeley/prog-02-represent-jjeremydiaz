@@ -53,6 +53,36 @@ public class MainActivity extends WearableActivity {
         String rep_1_name = "test";
         String rep_1_party = "test";
 
+        //For detailed view
+        String sen_1_bills = "test";
+        String sen_1_term = "test";
+        String sen_1_committee = "test";
+        String sen_2_bills = "test";
+        String sen_2_term = "test";
+        String sen_2_committee = "test";
+        String rep_1_bills = "test";
+        String rep_1_term = "test";
+        String rep_1_committee = "test";
+
+        //For 2012 Vote view
+        String sen_1_state = "test";
+        String sen_1_county = "test";
+        String sen_1_obama = "test";
+        String sen_1_romney = "test";
+        String sen_2_state = "test";
+        String sen_2_county = "test";
+        String sen_2_obama = "test";
+        String sen_2_romney = "test";
+        String rep_1_state = "test";
+        String rep_1_county = "test";
+        String rep_1_obama = "test";
+        String rep_1_romney = "test";
+
+        //Bioguide for images
+        String sen_1_bioguide = "test";
+        String sen_2_bioguide = "test";
+        String rep_1_bioguide = "test";
+
         //Get zip data sent from phone
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -63,11 +93,46 @@ public class MainActivity extends WearableActivity {
             sen_2_party = extras.getString("sen_2_party");
             rep_1_name = extras.getString("rep_1_name");
             rep_1_party = extras.getString("rep_1_party");
+
+            //For detailed view
+            sen_1_bills = extras.getString("sen_1_bills");
+            sen_1_term = extras.getString("sen_1_term");
+            sen_1_committee = extras.getString("sen_1_committee");
+            sen_2_bills = extras.getString("sen_2_bills");
+            sen_2_term = extras.getString("sen_2_term");
+            sen_2_committee = extras.getString("sen_2_committee");
+            rep_1_bills = extras.getString("rep_1_bills");
+            rep_1_term = extras.getString("rep_1_term");
+            rep_1_committee = extras.getString("rep_1_committee");
+
+            //For Vote view
+            sen_1_state = extras.getString("sen_1_state");
+            sen_1_county = extras.getString("sen_1_county");
+            sen_1_obama = extras.getString("sen_1_obama");
+            sen_1_romney = extras.getString("sen_1_romney");
+            sen_2_state = extras.getString("sen_2_state");
+            sen_2_county = extras.getString("sen_2_county");
+            sen_2_obama = extras.getString("sen_2_obama");
+            sen_2_romney = extras.getString("sen_2_romney");
+            rep_1_state = extras.getString("rep_1_state");
+            rep_1_county = extras.getString("rep_1_county");
+            rep_1_obama = extras.getString("rep_1_obama");
+            rep_1_romney = extras.getString("rep_1_romney");
+
+            //Image bioguide
+            sen_1_bioguide = extras.getString("sen_1_bioguide");
+            sen_2_bioguide = extras.getString("sen_2_bioguide");
+            rep_1_bioguide = extras.getString("rep_1_bioguide");
+
         }
 
         //Package these in an array to send to SampleGridPagerAdapter to allow for UI
         //to update
-        String [] ui_arr = {sen_1_name, sen_1_party, sen_2_name, sen_2_party, rep_1_name, rep_1_party,zip_code};
+        String [] ui_arr = {sen_1_name, sen_1_party, sen_2_name, sen_2_party, rep_1_name, rep_1_party, zip_code,
+                            sen_1_bills, sen_1_term, sen_1_committee, sen_2_bills, sen_2_term, sen_2_committee,
+                            rep_1_bills, rep_1_term, rep_1_committee, sen_1_state, sen_1_county, sen_1_obama,
+                            sen_1_romney, sen_2_state, sen_2_county, sen_2_obama, sen_2_romney, rep_1_state,
+                            rep_1_county, rep_1_obama, rep_1_romney, sen_1_bioguide, sen_2_bioguide, rep_1_bioguide};
 
         //Set up an OnShake listener
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -80,17 +145,7 @@ public class MainActivity extends WearableActivity {
 
                 Intent sendIntent = new Intent(getBaseContext(), WatchToPhoneService.class);
 
-                //For demo only
-                String send;
-                if(zip_code.equals("94547")){
-                    send = "46360";
-                }
-                else{
-                    send = "94547";
-                }
-
-                sendIntent.putExtra("message", send);
-                sendIntent.putExtra("path", send);
+                sendIntent.putExtra("path", "zip_gen");
                 startService(sendIntent);
 
             }

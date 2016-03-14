@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 public class DetailedViewActivity extends AppCompatActivity {
     RoundImage roundedImage;
     String uri;
@@ -23,6 +25,10 @@ public class DetailedViewActivity extends AppCompatActivity {
     String term;
     String committees;
     String bills;
+    String bioguide;
+
+    String image_base = "https://theunitedstates.io/images/congress/225x275/";
+    String jpg = ".jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,7 @@ public class DetailedViewActivity extends AppCompatActivity {
             term = extras.getString("term_end");
             committees = extras.getString("committees");
             bills = extras.getString("bills");
+            bioguide = extras.getString("bioguide");
         }
 
         //Convert new scaled down square image to round
@@ -53,7 +60,9 @@ public class DetailedViewActivity extends AppCompatActivity {
         //Round image and display
         roundedImage = new RoundImage(resized);
         ImageView imageView = (ImageView) findViewById(R.id.image_view);
-        imageView.setImageDrawable(roundedImage);
+        //imageView.setImageDrawable(roundedImage);
+        Picasso.with(this).load(image_base + bioguide + jpg).resize(350, 350).transform(new CircleTransform()).into(imageView);
+
 
         //Write to EditTexts
         EditText text_name = (EditText) findViewById(R.id.detailed_view_name);

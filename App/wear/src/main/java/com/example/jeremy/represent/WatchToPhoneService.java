@@ -67,8 +67,28 @@ public class WatchToPhoneService extends Service {
         // which was passed over when we called startService
         Bundle extras = intent.getExtras();
         final String path = extras.getString("path"); //use path to differentiate output
-        final String message = extras.getString("message"); //to send
+        if(path.equals("/zip_gen")){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //first, connect to the apiclient
+                    mWatchApiClient.connect();
+                    //now that you're connected, send a massage with the cat name
+                    sendMessage("/" + path, "");
+                }
+            }).start();
 
+            return START_STICKY;
+        }
+
+        final String message = extras.getString("message"); //to send
+        final String party = extras.getString("party");
+        final String bills = extras.getString("bills");
+        final String term = extras.getString("term");
+        final String committee = extras.getString("committee");
+        final String bioguide = extras.getString("bioguide");
+
+        final String send = message + ";" + party + ";" + bills + ";" + term + ";" + committee + ";" + bioguide;
         // Send the message with the cat name
         new Thread(new Runnable() {
             @Override
@@ -76,7 +96,7 @@ public class WatchToPhoneService extends Service {
                 //first, connect to the apiclient
                 mWatchApiClient.connect();
                 //now that you're connected, send a massage with the cat name
-                sendMessage("/" + path, message);
+                sendMessage("/" + path, send);
             }
         }).start();
 
