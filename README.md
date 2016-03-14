@@ -22,25 +22,25 @@ See http://youtu.be/QZ7J_AWzmFA?hd=1
 
 ## Screenshots
 
-Main View
+Main View <br />
 <img src="screenshots/main_view.jpg" height="400" alt="Screenshot"/>
 
-Entering Zip Code
+Entering Zip Code <br />
 <img src="screenshots/zip.jpg" height="400" alt="Screenshot"/>
 
-Congressional View
+Congressional View <br/>
 <img src="screenshots/congressional_view.jpg" height="400" alt="Screenshot"/>
 
-Detailed View
+Detailed View <br />
 <img src="screenshots/detailed_view.jpg" height="400" alt="Screenshot"/>
 
-Watch Splash View
+Watch Splash View <br/ >
 <img src="screenshots/splash_view.jpg" height="400" alt="Screenshot"/>
 
-Watch Vote View
+Watch Vote View <br />
 <img src="screenshots/vote_view.jpg" height="400" alt="Screenshot"/>
 
-Watch Main View
+Watch Main View <br />
 <img src="screenshots/main_watch_view.jpg" height="400" alt="Screenshot"/>
 
 
